@@ -62,6 +62,12 @@
 - **기능:** 게시글 목록 조회 (번호, 제목, 생성일, 조회수 표시)
 - **데이터 관리:** `PostService` (ArrayList 기반 메모리 저장소)
 
+### Post Detail (Web)
+- **컨트롤러:** `PostController`
+- **엔드포인트:** `/posts/{no}`
+- **뷰 템플릿:** `post_detail.html`
+- **기능:** 게시글 상세 내용 조회 및 조회수 증가
+
 ## 6. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
 - **포트 설정:** 기본 포트는 `8080`을 사용합니다.

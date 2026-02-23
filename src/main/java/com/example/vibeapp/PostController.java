@@ -20,4 +20,11 @@ public class PostController {
         model.addAttribute("posts", posts);
         return "posts";
     }
+
+    @GetMapping("/posts/{no}")
+    public String detail(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
+        Post post = postService.getPostWithViewCount(no);
+        model.addAttribute("post", post);
+        return "post_detail";
+    }
 }
