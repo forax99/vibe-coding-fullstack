@@ -31,7 +31,13 @@
 - `spring-boot-starter`: 기본 스프링부트 스타터
 - `spring-boot-starter-test`: 테스트 자동화를 위한 라이브러리
 
-## 5. API 및 컨트롤러 명세
+## 5. 프론트엔드 도구
+- **CSS 프레임워크:**
+  - `Tailwind CSS` (CDN 방식): 메인 랜딩 페이지 UI 담당
+  - `Bootstrap 5` (CDN 방식): 범용 UI 컴포넌트 및 기본 유틸리티 담당
+- **폰트:** `Inter`, `Nanum Gothic` (Google Fonts)
+
+## 6. API 및 컨트롤러 명세
 ### Home (Web)
 - **컨트롤러:** `HomeController`
 - **엔드포인트:** `/`
