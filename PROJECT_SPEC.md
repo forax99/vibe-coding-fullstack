@@ -42,13 +42,25 @@
 - **컨트롤러:** `HomeController`
 - **엔드포인트:** `/`
 - **뷰 템플릿:** `home.html`
-- **기능:** "Hello, Vibe!" 메시지 표시
+- **기능:** "Hello, Vibe!" 메시지 표시 (Bootstrap 5 적용)
+
+### Landing (Web)
+- **엔드포인트:** `/landing.html` (정적 리소스 또는 향후 컨트롤러 매핑)
+- **뷰 템플릿:** `landing.html`
+- **기능:** 바이브코딩 메인 브랜드 랜딩 페이지 (Tailwind CSS 적용)
 
 ### Hello (API)
 - **컨트롤러:** `VibeApp`
 - **엔드포인트:** `/api/hello`
 - **HTTP 메서드:** GET
 - **기능:** "Hello, Vibe!" 문자열 반환
+
+### Posts (Web)
+- **컨트롤러:** `PostController`
+- **엔드포인트:** `/posts`
+- **뷰 템플릿:** `posts.html`
+- **기능:** 게시글 목록 조회 (번호, 제목, 생성일, 조회수 표시)
+- **데이터 관리:** `PostService` (ArrayList 기반 메모리 저장소)
 
 ## 6. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
