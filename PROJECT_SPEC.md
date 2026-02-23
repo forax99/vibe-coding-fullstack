@@ -68,6 +68,12 @@
 - **뷰 템플릿:** `post_detail.html`
 - **기능:** 게시글 상세 내용 조회 및 조회수 증가
 
+### Post Create (Web)
+- **컨트롤러:** `PostController`
+- **엔드포인트:** `/posts/new`
+- **뷰 템플릿:** `post_new_form.html`
+- **기능:** 새 게시글 작성을 위한 폼 제공 및 등록 알림
+
 ## 6. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
 - **포트 설정:** 기본 포트는 `8080`을 사용합니다.
