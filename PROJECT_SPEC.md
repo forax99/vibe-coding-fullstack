@@ -70,9 +70,10 @@
 
 ### Post Create (Web)
 - **컨트롤러:** `PostController`
-- **엔드포인트:** `/posts/new`
-- **뷰 템플릿:** `post_new_form.html`
-- **기능:** 새 게시글 작성을 위한 폼 제공 및 등록 알림
+- **엔드포인트:** 
+  - GET `/posts/new`: 작성 폼 제공
+  - POST `/posts/add`: 새 게시글 등록 및 목록 리다이렉트
+- **기능:** 폼 데이터를 받아 인메모리에 저장 (번호 자동 생성, 날짜/조회수 초기화)
 
 ## 6. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
