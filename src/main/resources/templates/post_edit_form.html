@@ -23,7 +23,7 @@
                         <h2 class="fw-bold mb-0 text-primary">게시글 수정폼</h2>
                     </div>
                     <div class="card-body p-4">
-                        <form id="editForm">
+                        <form id="editForm" th:action="@{/posts/{no}/save(no=${post.no})}" method="post">
                             <!-- 번호 (Read-only) -->
                             <div class="mb-4">
                                 <label for="no" class="form-label fw-bold">번호</label>
@@ -33,15 +33,15 @@
                             <!-- 제목 -->
                             <div class="mb-4">
                                 <label for="title" class="form-label fw-bold">제목</label>
-                                <input type="text" class="form-control" id="title" th:value="${post.title}"
+                                <input type="text" class="form-control" id="title" name="title" th:value="${post.title}"
                                     placeholder="제목을 입력하세요">
                             </div>
 
                             <!-- 내용 -->
                             <div class="mb-4">
                                 <label for="content" class="form-label fw-bold">내용</label>
-                                <textarea class="form-control" id="content" rows="10" th:text="${post.content}"
-                                    placeholder="내용을 입력하세요"></textarea>
+                                <textarea class="form-control" id="content" name="content" rows="10"
+                                    th:text="${post.content}" placeholder="내용을 입력하세요"></textarea>
                             </div>
 
                             <div class="row mb-4">
@@ -67,8 +67,7 @@
                             </div>
 
                             <div class="d-flex justify-content-end gap-2 mt-4">
-                                <button type="button" class="btn btn-primary px-5 fw-bold"
-                                    onclick="handleSave()">저장</button>
+                                <button type="submit" class="btn btn-primary px-5 fw-bold">저장</button>
                                 <a th:href="@{/posts/{no}(no=${post.no})}"
                                     class="btn btn-outline-secondary px-5 fw-bold">취소</a>
                             </div>
@@ -80,9 +79,10 @@
     </div>
 
     <script th:inline="javascript">
-        function handleSave() {
-            alert('저장 버튼이 클릭되었습니다.');
-        }
+        // 저장 요청 시 알림창 출력 후 폼 제출은 브라우저 기본 동작인 submit으로 처리
+        document.getElementById('editForm').onsubmit = function () {
+            alert('게시글 수정을 요청합니다.');
+        };
     </script>
 </body>
 
