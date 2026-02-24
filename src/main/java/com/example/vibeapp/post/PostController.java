@@ -3,21 +3,22 @@ package com.example.vibeapp.post;
 import com.example.vibeapp.post.dto.PostCreateDto;
 import com.example.vibeapp.post.dto.PostListDto;
 import com.example.vibeapp.post.dto.PostResponseDto;
-
 import com.example.vibeapp.post.dto.PostUpdateDto;
 import jakarta.validation.Valid;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Controller
+/**
+ * 게시글 REST API 컨트롤러
+ * 모든 응답은 JSON 형식으로 반환됩니다.
+ */
+@RestController
+@RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
 
@@ -25,68 +26,55 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/posts")
-    public String listPosts(@RequestParam(defaultValue = "1") int page, Model model) {
+    /** 게시글 목록 조회 (페이징 포함) */
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> listPosts(@RequestParam(defaultValue = "1") int page) {
         int size = 5;
         List<PostListDto> posts = postService.findPagedPosts(page, size);
         int totalCount = postService.countPosts();
         int totalPages = (int) Math.ceil((double) totalCount / size);
 
-        model.addAttribute("posts", posts);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        return "post/posts";
+        Map<String, Object> response = new HashMap<>();
+        response.put("posts", posts);
+        response.put("currentPage", page);
+        response.put("totalPages", totalPages);
+        response.put("totalCount", totalCount);
+
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/posts/{no}")
-    public String viewPost(@PathVariable Long no, Model model) {
+    /** 게시글 상세 조회 (조회수 증가) */
+    @GetMapping("/{no}")
+    public ResponseEntity<PostResponseDto> viewPost(@PathVariable Long no) {
         PostResponseDto post = postService.viewPost(no);
-        model.addAttribute("post", post);
-        return "post/post_detail";
-    }
-
-    @GetMapping("/posts/{no}/edit")
-    public String updatePostForm(@PathVariable Long no, Model model) {
-        PostResponseDto post = postService.findPost(no);
-        model.addAttribute("post", post);
-
-        // Convert tags list to comma-separated string for the form
-        String tagsString = post.tags() != null ? String.join(", ", post.tags()) : "";
-        model.addAttribute("postUpdateDto", new PostUpdateDto(post.title(), post.content(), tagsString));
-        return "post/post_edit_form";
-    }
-
-    @GetMapping("/posts/new")
-    public String createPostForm(Model model) {
-        model.addAttribute("postCreateDto", new PostCreateDto());
-        return "post/post_new_form";
-    }
-
-    @PostMapping("/posts/add")
-    public String addPost(@Valid @ModelAttribute PostCreateDto postCreateDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "post/post_new_form";
+        if (post == null) {
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(post);
+    }
+
+    /** 게시글 등록 */
+    @PostMapping
+    public ResponseEntity<Void> addPost(@Valid @RequestBody PostCreateDto postCreateDto) {
         postService.addPost(postCreateDto);
-        return "redirect:/posts";
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/posts/{no}/save")
-    public String savePost(@PathVariable Long no, @Valid @ModelAttribute PostUpdateDto postUpdateDto,
-            BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            PostResponseDto post = postService.findPost(no);
-
-            model.addAttribute("post", post);
-            return "post/post_edit_form";
+    /** 게시글 수정 */
+    @PutMapping("/{no}")
+    public ResponseEntity<Void> updatePost(@PathVariable Long no, @Valid @RequestBody PostUpdateDto postUpdateDto) {
+        try {
+            postService.updatePost(no, postUpdateDto);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         }
-        postService.updatePost(no, postUpdateDto);
-        return "redirect:/posts/" + no;
     }
 
-    @PostMapping("/posts/{no}/delete")
-    public String deletePost(@PathVariable Long no) {
+    /** 게시글 삭제 */
+    @DeleteMapping("/{no}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long no) {
         postService.deletePost(no);
-        return "redirect:/posts";
+        return ResponseEntity.noContent().build();
     }
 }
