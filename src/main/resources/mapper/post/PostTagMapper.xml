@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.vibeapp.post.PostTagRepository">
+
+    <!-- ResultMap: post_tags 테이블 컬럼 → PostTag 객체 매핑 -->
+    <resultMap id="postTagResultMap" type="com.example.vibeapp.post.PostTag">
+        <id     property="id"       column="id"/>
+        <result property="postNo"   column="post_no"/>
+        <result property="tagName"  column="tag_name"/>
+    </resultMap>
+
+    <!-- 태그 추가 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO post_tags (post_no, tag_name)
+        VALUES (#{postNo}, #{tagName})
+    </insert>
+
+    <!-- 특정 게시글의 특정 태그 삭제 -->
+    <delete id="deleteByPostNoAndTagName">
+        DELETE FROM post_tags
+        WHERE post_no = #{postNo}
+          AND tag_name = #{tagName}
+    </delete>
+
+    <!-- 특정 게시글의 태그 전체 삭제 -->
+    <delete id="deleteAllByPostNo">
+        DELETE FROM post_tags
+        WHERE post_no = #{postNo}
+    </delete>
+
+</mapper>
