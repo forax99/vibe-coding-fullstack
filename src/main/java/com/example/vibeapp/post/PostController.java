@@ -15,11 +15,11 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String list(@org.springframework.web.bind.annotation.RequestParam(defaultValue = "1") int page,
+    public String listPosts(@org.springframework.web.bind.annotation.RequestParam(defaultValue = "1") int page,
             Model model) {
         int size = 5;
-        List<Post> posts = postService.getPagedPosts(page, size);
-        int totalCount = postService.getTotalCount();
+        List<Post> posts = postService.findPagedPosts(page, size);
+        int totalCount = postService.countPosts();
         int totalPages = (int) Math.ceil((double) totalCount / size);
 
         model.addAttribute("posts", posts);
@@ -29,21 +29,21 @@ public class PostController {
     }
 
     @GetMapping("/posts/{no}")
-    public String detail(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
+    public String viewPost(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
         Post post = postService.getPostWithViewCount(no);
         model.addAttribute("post", post);
         return "post/post_detail";
     }
 
     @GetMapping("/posts/{no}/edit")
-    public String editForm(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
+    public String updatePostForm(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
         Post post = postService.getPost(no);
         model.addAttribute("post", post);
         return "post/post_edit_form";
     }
 
     @GetMapping("/posts/new")
-    public String form() {
+    public String createPostForm() {
         return "post/post_new_form";
     }
 

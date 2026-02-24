@@ -27,11 +27,7 @@ public class PostService {
         }
     }
 
-    public List<Post> getPosts() {
-        return postRepository.findAll();
-    }
-
-    public List<Post> getPagedPosts(int page, int size) {
+    public List<Post> findPagedPosts(int page, int size) {
         List<Post> allPosts = postRepository.findAll();
         // 게시글 번호 내림차순 정렬 (최신순)
         allPosts.sort((p1, p2) -> p2.getNo().compareTo(p1.getNo()));
@@ -46,7 +42,7 @@ public class PostService {
         return allPosts.subList(start, end);
     }
 
-    public int getTotalCount() {
+    public int countPosts() {
         return postRepository.findAll().size();
     }
 
