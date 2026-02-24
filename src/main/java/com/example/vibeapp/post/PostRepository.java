@@ -1,60 +1,32 @@
 package com.example.vibeapp.post;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-import java.util.Optional;
 
-@Repository
-public class PostRepository {
-
-    @PersistenceContext
-    private EntityManager em;
-
-    /** JPQL을 사용하여 모든 게시글을 최신순으로 조회 */
-    public List<Post> findAll() {
-        return em.createQuery("SELECT p FROM Post p ORDER BY p.no DESC", Post.class)
-                .getResultList();
-    }
-
-    /** JPQL과 setFirstResult/setMaxResults를 이용한 페이징 처리 */
-    public List<Post> findPaged(int offset, int size) {
-        return em.createQuery("SELECT p FROM Post p ORDER BY p.no DESC", Post.class)
-                .setFirstResult(offset)
-                .setMaxResults(size)
-                .getResultList();
-    }
-
-    /** 전체 데이터 개수 조회 */
-    public int count() {
-        return ((Number) em.createQuery("SELECT COUNT(p) FROM Post p").getSingleResult()).intValue();
-    }
-
-    /** 식별자(PK)로 단건 조회 */
-    public Post findByNo(Long no) {
-        return em.find(Post.class, no);
-    }
-
-    /** persist()를 이용한 새로운 엔티티 저장 */
-    public void insert(Post post) {
-        em.persist(post);
-    }
+/**
+ * Spring Data JPA Repository 인터페이스
+ * JpaRepository를 상속받으면 기본적인 CRUD 메서드가 자동으로 생성됩니다.
+ */
+public interface PostRepository extends JpaRepository<Post, Long> {
 
     /** 
-     * 변경 감지(Dirty Checking) 또는 merge()를 통한 수정 
-     * 영속성 컨텍스트가 관리하는 엔티티의 상태가 변경되면 트랜잭션 커밋 시점에 자동으로 DB에 반영됩니다.
+     * 모든 게시글을 PK(no) 내림차순으로 조회하는 쿼리 메서드
+     * ORDER BY p.no DESC 와 동일한 동작을 수행합니다.
      */
-    public void update(Post post) {
-        em.merge(post);
-    }
+    List<Post> findAllByOrderByNoDesc();
 
-    /** 엔티티를 찾아 영속성 컨텍스트에서 제거(삭제) */
-    public void deleteByNo(Long no) {
-        Post post = em.find(Post.class, no);
-        if (post != null) {
-            em.remove(post);
-        }
-    }
+    /**
+     * 페이징 처리를 포함한 게시글 목록 조회
+     * Pageable을 통해 offset, size, sort를 유연하게 관리할 수 있습니다.
+     */
+    Page<Post> findAll(Pageable pageable);
+
+    /**
+     * 식별자(no)로 단건 조회
+     * JpaRepository에서 기본 제공하는 findById를 사용할 수 있지만, 
+     * 기존 코드와의 일치성을 위해 메서드를 정의하거나 그대로 사용합니다.
+     */
+    // Post findByNo(Long no); // findById로 대체 가능
 }

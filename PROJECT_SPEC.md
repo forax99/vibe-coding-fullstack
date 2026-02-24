@@ -28,7 +28,7 @@
 ### 의존성
 - `spring-boot-starter-thymeleaf`: 서버 사이드 렌더링(SSR)을 위한 뷰 템플릿 엔진
 - `spring-boot-starter-web`: REST API 및 웹 서블릿 지원
-- `spring-boot-starter-data-jpa`: 순수 JPA(EntityManager)를 이용한 데이터 영속성 관리
+- `spring-boot-starter-data-jpa`: Spring Data JPA를 이용한 데이터 영속성 관리
 - `com.h2database:h2`: 로컬 개발용 인메모리/파일 기반 DB
 - `spring-boot-starter-validation`: 데이터 검증 지원
 - `spring-boot-starter`: 기본 스프링부트 스타터
@@ -102,5 +102,5 @@
 ## 8. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
 - **포트 설정:** 기본 포트는 `8080`을 사용합니다.
-- **영속성 계층:** MyBatis 대신 **순수 JPA (EntityManager)**를 직접 사용하며, Spring Data JPA Repository 인터페이스는 사용하지 않습니다.
-- **명명 규칙:** 실무 관례를 준수하며, 명확한 동사 기반의 메서드명을 사용합니다.
+- **영속성 계층:** **Spring Data JPA (JpaRepository)**를 사용하여 데이터 접근 계층을 구현합니다.
+- **명명 규칙:** 실무 관례를 준수하며, Spring Data JPA의 쿼리 메서드 명명 규칙을 따릅니다.
