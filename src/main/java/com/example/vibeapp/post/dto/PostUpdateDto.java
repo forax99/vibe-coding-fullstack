@@ -11,6 +11,7 @@ public class PostUpdateDto {
     @Size(max = 100, message = "제목은 100자 이내여야 합니다.")
     private String title;
 
+    @NotBlank(message = "내용은 필수입니다.")
     private String content;
 
     public PostUpdateDto() {
