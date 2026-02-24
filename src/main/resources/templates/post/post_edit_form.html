@@ -23,7 +23,8 @@
                         <h2 class="fw-bold mb-0 text-primary">게시글 수정폼</h2>
                     </div>
                     <div class="card-body p-4">
-                        <form id="editForm" th:action="@{/posts/{no}/save(no=${post.no})}" method="post">
+                        <form id="editForm" th:action="@{/posts/{no}/save(no=${post.no})}" th:object="${postUpdateDto}"
+                            method="post">
                             <!-- 번호 (Read-only) -->
                             <div class="mb-4">
                                 <label for="no" class="form-label fw-bold">번호</label>
@@ -33,15 +34,19 @@
                             <!-- 제목 -->
                             <div class="mb-4">
                                 <label for="title" class="form-label fw-bold">제목</label>
-                                <input type="text" class="form-control" id="title" name="title" th:value="${post.title}"
-                                    placeholder="제목을 입력하세요">
+                                <input type="text" class="form-control" th:field="*{title}" placeholder="제목을 입력하세요"
+                                    th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}"
+                                    th:errors="*{title}">
+                                    제목 오류
+                                </div>
                             </div>
 
                             <!-- 내용 -->
                             <div class="mb-4">
                                 <label for="content" class="form-label fw-bold">내용</label>
-                                <textarea class="form-control" id="content" name="content" rows="10"
-                                    th:text="${post.content}" placeholder="내용을 입력하세요"></textarea>
+                                <textarea class="form-control" th:field="*{content}" rows="10"
+                                    placeholder="내용을 입력하세요"></textarea>
                             </div>
 
                             <div class="row mb-4">
