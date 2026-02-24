@@ -24,7 +24,13 @@
                         조회수: <span class="fw-bold" th:text="${post.views}">0</span>
                     </small>
                 </div>
-                <h2 class="fw-bold mt-3 mb-0" th:text="${post.title}">게시글 제목</h2>
+                <h2 class="fw-bold mt-3 mb-2" th:text="${post.title}">게시글 제목</h2>
+                <!-- 태그 뱃지 -->
+                <div th:if="${post.tags != null and !post.tags.isEmpty()}">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary" th:each="tag : ${post.tags}" th:text="${tag}">태그명</span>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="mb-4 text-muted small">
@@ -41,23 +47,17 @@
                     </div>
                 </div>
 
-                <!-- 태그 섹션 추가 -->
-                <div class="mb-4" th:if="${post.tags != null and !post.tags.isEmpty()}">
-                    <h5 class="fw-bold mb-3">태그</h5>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge bg-secondary" th:each="tag : ${post.tags}" th:text="${tag}">태그명</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer bg-white py-3 d-flex justify-content-end align-items-center">
-                <form id="deleteForm" th:action="@{/posts/{no}/delete(no=${post.no})}" method="post" class="me-auto">
-                    <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">삭제</button>
-                </form>
-                <a th:href="@{/posts/{no}/edit(no=${post.no})}" class="btn btn-primary px-4 me-2">수정</a>
-                <a href="/posts" class="btn btn-outline-secondary px-4">목록으로</a>
             </div>
         </div>
+        <div class="card-footer bg-white py-3 d-flex justify-content-end align-items-center">
+            <form id="deleteForm" th:action="@{/posts/{no}/delete(no=${post.no})}" method="post" class="me-auto">
+                <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal">삭제</button>
+            </form>
+            <a th:href="@{/posts/{no}/edit(no=${post.no})}" class="btn btn-primary px-4 me-2">수정</a>
+            <a href="/posts" class="btn btn-outline-secondary px-4">목록으로</a>
+        </div>
+    </div>
     </div>
     <!-- 삭제 확인 모달 -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
