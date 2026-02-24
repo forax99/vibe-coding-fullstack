@@ -62,8 +62,9 @@ public class PostService {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
-        post.setCreatedAt(LocalDateTime.now());
-        post.setUpdatedAt(null);
+        LocalDateTime now = LocalDateTime.now();
+        post.setCreatedAt(now);
+        post.setUpdatedAt(now);
         post.setViews(0);
         postRepository.save(post);
     }
