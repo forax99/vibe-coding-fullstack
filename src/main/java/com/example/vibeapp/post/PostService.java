@@ -22,6 +22,7 @@ public class PostService {
     }
 
     /** 페이징된 게시글 목록 조회 (DB에서 직접 페이징) */
+    @Transactional(readOnly = true)
     public List<PostListDto> findPagedPosts(int page, int size) {
         int offset = (page - 1) * size;
         return postRepository.findPaged(offset, size).stream()
@@ -30,23 +31,27 @@ public class PostService {
     }
 
     /** 전체 게시글 수 */
+    @Transactional(readOnly = true)
     public int countPosts() {
         return postRepository.count();
     }
 
     /** 조회수 증가 후 단건 반환 */
+    @Transactional
     public PostResponseDto viewPost(Long no) {
         Post post = postRepository.findByNo(no);
         if (post == null)
             return null;
         post.setViews(post.getViews() + 1);
         post.setUpdatedAt(LocalDateTime.now());
+        // update(post)를 명시적으로 호출하지만, @Transactional 내에서는 Dirty Checking에 의해 자동 반영될 수도 있습니다.
         postRepository.update(post);
         List<String> tags = postTagRepository.findByPostNo(no).stream().map(PostTag::getTagName).toList();
         return PostResponseDto.from(post, tags);
     }
 
     /** 수정용 단건 조회 (조회수 불변) */
+    @Transactional(readOnly = true)
     public PostResponseDto findPost(Long no) {
         Post post = postRepository.findByNo(no);
         if (post == null)
