@@ -28,6 +28,9 @@
 ### 의존성
 - `spring-boot-starter-thymeleaf`: 서버 사이드 렌더링(SSR)을 위한 뷰 템플릿 엔진
 - `spring-boot-starter-web`: REST API 및 웹 서블릿 지원
+- `spring-boot-starter-data-jpa`: 순수 JPA(EntityManager)를 이용한 데이터 영속성 관리
+- `com.h2database:h2`: 로컬 개발용 인메모리/파일 기반 DB
+- `spring-boot-starter-validation`: 데이터 검증 지원
 - `spring-boot-starter`: 기본 스프링부트 스타터
 - `spring-boot-starter-test`: 테스트 자동화를 위한 라이브러리
 - `spring-boot-devtools`: 개발 중 자동 재시작 및 실시간 변경 반영 지원
@@ -65,7 +68,7 @@
 - **엔드포인트:** `/posts` (파라미터: `page` - 기본값 1)
 - **뷰 템플릿:** `post/posts.html`
 - **기능:** 게시글 목록 조회 및 **페이지네이션 (페이지당 5개)**
-- **데이터 관리:** `PostService` (ArrayList 기반 메모리 저장소)
+- **데이터 관리:** `PostService` (순수 JPA EntityManager 기반 H2 데이터베이스 저장소)
 
 ### Post Detail (Web)
 - **컨트롤러:** `PostController`
@@ -99,4 +102,5 @@
 ## 8. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
 - **포트 설정:** 기본 포트는 `8080`을 사용합니다.
+- **영속성 계층:** MyBatis 대신 **순수 JPA (EntityManager)**를 직접 사용하며, Spring Data JPA Repository 인터페이스는 사용하지 않습니다.
 - **명명 규칙:** 실무 관례를 준수하며, 명확한 동사 기반의 메서드명을 사용합니다.
