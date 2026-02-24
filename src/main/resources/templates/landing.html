@@ -1,373 +1,358 @@
 <!DOCTYPE html>
 
-<html lang="ko">
+<html class="dark" lang="ko">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Vibe Coding | 코딩에 감각을 더하다</title>
-    <!-- Google Fonts: Inter & Nanum Gothic for a clean Korean look -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Nanum+Gothic:wght@400;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tailwind CSS v3 CDN -->
+    <title>Vibe Coding - AI와 함께하는 코딩의 미래</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        samsungBlue: '#0c4da2',
-                        vibePrimary: '#7b00ff', // From THEME_5 custom_color
-                        vibeGray: '#f4f4f4',
-                        vibeText: '#000000',
+                        "primary": "#a60df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#1c1022",
                     },
                     fontFamily: {
-                        sans: ['Inter', 'Nanum Gothic', 'sans-serif'],
+                        "display": ["Space Grotesk", "sans-serif"]
                     },
-                    borderRadius: {
-                        'samsung': '8px', // ROUND_EIGHT from THEME_5
-                    }
-                }
-            }
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
         }
     </script>
-    <style data-purpose="custom-layout">
+    <style>
         body {
-            background-color: #ffffff;
-            color: #000000;
-            overflow-x: hidden;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Simple glass effect for nav if scrolled (handled via JS or just fixed) */
-        .nav-glass {
-            background: rgba(255, 255, 255, 0.9);
+        .glass-card {
+            background: rgba(166, 13, 242, 0.05);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(166, 13, 242, 0.2);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
         }
     </style>
 </head>
 
-<body class="antialiased">
-    <!-- BEGIN: Header Navigation -->
-    <header class="sticky top-0 z-50 w-full border-b border-gray-100 nav-glass">
-        <nav class="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-12">
-                <a class="text-2xl font-extrabold tracking-tighter text-vibeText" data-purpose="logo" href="#">
-                    VIBE CODING
-                </a>
-                <ul class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
-                    <li><a class="hover:text-samsungBlue transition-colors" href="#services">무엇을 하나요</a></li>
-                    <li><a class="hover:text-samsungBlue transition-colors" href="#courses">코스</a></li>
-                    <li><a class="hover:text-samsungBlue transition-colors" href="#projects">프로젝트</a></li>
-                    <li><a class="hover:text-samsungBlue transition-colors" href="#community">커뮤니티</a></li>
-                </ul>
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="container mx-auto flex h-16 items-center justify-between px-4">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Vibe Coding</span>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-sm font-semibold text-gray-700 px-4 py-2">로그인</button>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a class="hover:text-primary transition-colors" href="#">기능</a>
+                <a class="hover:text-primary transition-colors" href="#">가격</a>
+                <a class="hover:text-primary transition-colors" href="#">커뮤니티</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <button class="text-sm font-semibold hover:text-primary transition-colors">로그인</button>
                 <button
-                    class="bg-vibeText text-white px-5 py-2 rounded-samsung text-sm font-semibold hover:bg-gray-800 transition-all">
-                    시작하기
-                </button>
+                    class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">시작하기</button>
             </div>
-        </nav>
+        </div>
     </header>
-    <!-- END: Header Navigation -->
     <main>
-        <!-- BEGIN: Hero Section -->
-        <section class="relative bg-white overflow-hidden py-20 lg:py-32" data-purpose="hero">
-            <div class="container mx-auto px-4 md:px-8 flex flex-col items-center text-center">
-                <!-- Abstract shape background element -->
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-purple-50 to-blue-50 rounded-full blur-3xl opacity-60 -z-10">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden py-20 lg:py-32">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-20">
+                <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary rounded-full blur-[120px]"></div>
+                <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary rounded-full blur-[120px]">
                 </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-vibeText tracking-tight mb-6 leading-tight">
-                    코딩에 감각을 더하다,<br />
-                    <span class="text-samsungBlue">바이브코딩</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-10 leading-relaxed">
-                    논리와 미학의 접점. 크리에이티브 코딩을 마스터하고<br class="hidden md:block" /> 공명을 일으키는 디지털 경험을 구축하세요.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button
-                        class="bg-samsungBlue text-white px-10 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-lg shadow-blue-200">
-                        학습 시작하기
-                    </button>
-                    <button
-                        class="border border-gray-300 text-vibeText px-10 py-4 rounded-full text-lg font-bold hover:bg-gray-50 transition-colors">
-                        더 알아보기
-                    </button>
-                </div>
-                <!-- Placeholder Hero Image Mockup -->
-                <div class="mt-16 w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl">
-                    <img alt="Vibe Coding Platform Preview" class="w-full h-auto"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_jTKceRk49wOsf2Pjwh1phyJfSjaS7-uPQz797OUc4d0DLrKDJMFvNSgLCHexBL0jBrSEj4Sg3lrd3HehfeRIdTfPeI-jX26qqMeCaLqXgRJaRbZ39uJcc7UnpMrXtHf3Y7BGlLq4Y7Y-0qmzEcAkMznbgVguWG4RQdiJu6yBKBETHNiTWhfG4xQ6k68260si5juZMbkFnAIEaexRX5dog-iL1zxvX9Umx50KFTdnB-NnlfiUyst4sv2JoXW_-zI1ZJ8b_ExYgYJh" />
+            </div>
+            <div class="container mx-auto px-4 relative">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                    <div class="flex-1 text-center lg:text-left">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            v2.0 Beta 출시
+                        </div>
+                        <h1
+                            class="text-5xl lg:text-7xl font-black leading-tight tracking-tighter mb-6 bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">
+                            바이브로 완성하는<br />코딩의 미래
+                        </h1>
+                        <p
+                            class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            AI와 함께 대화하듯 코딩하세요. 아이디어를 현실로 만드는 가장 빠른 방법, Vibe Coding입니다. 복잡한 문법보다 당신의 '바이브'에 집중하세요.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <button
+                                class="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg shadow-xl shadow-primary/30 hover:shadow-primary/40 transition-all hover:-translate-y-1">
+                                지금 무료로 시작하기
+                            </button>
+                            <button
+                                class="w-full sm:w-auto px-8 py-4 bg-slate-200 dark:bg-slate-800 rounded-xl font-bold text-lg hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                                데모 보기
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1 w-full max-w-2xl">
+                        <div class="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl">
+                            <div
+                                class="bg-slate-800/50 backdrop-blur px-4 py-2 flex items-center gap-2 border-b border-white/5">
+                                <div class="flex gap-1.5">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 font-mono ml-4 uppercase tracking-widest">
+                                    vibe_editor.tsx</div>
+                            </div>
+                            <div class="aspect-video bg-slate-900 p-6 font-mono text-sm overflow-hidden"
+                                data-alt="Modern dark mode code editor interface with glowing syntax highlighting"
+                                style="background-image: linear-gradient(to bottom right, #1a1a2e, #16213e)">
+                                <div class="space-y-2">
+                                    <div class="text-purple-400">const <span class="text-blue-400">future</span> = ()
+                                        =&gt; {</div>
+                                    <div class="pl-4 text-slate-400">// Vibe coding starts here</div>
+                                    <div class="pl-4 text-pink-400">return (</div>
+                                    <div class="pl-8 text-blue-300">&lt;VibeCanvas&gt;</div>
+                                    <div class="pl-12 text-slate-300">"Build me a sleek dashboard with real-time
+                                        analytics"</div>
+                                    <div class="pl-8 text-blue-300">&lt;/VibeCanvas&gt;</div>
+                                    <div class="pl-4 text-pink-400">);</div>
+                                    <div class="text-purple-400">};</div>
+                                    <div class="mt-8 border-l-2 border-primary pl-4 py-2 bg-primary/5">
+                                        <div class="text-primary text-xs mb-1">AI Suggestion:</div>
+                                        <div class="text-slate-200 italic">"레이아웃 구성을 위한 Grid 컴포넌트와 차트 라이브러리를 추가할까요?"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- END: Hero Section -->
-        <!-- BEGIN: Services Section -->
-        <section class="py-24 bg-vibeGray/30" data-purpose="services" id="services">
-            <div class="container mx-auto px-4 md:px-8">
+        <!-- Features Section -->
+        <section class="py-24 bg-slate-50 dark:bg-slate-900/30">
+            <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">전문적인 서비스</h2>
-                    <p class="text-gray-500">당신의 성장을 위한 최적화된 커리큘럼</p>
+                    <h2 class="text-3xl lg:text-5xl font-bold mb-4 tracking-tight">혁신적인 개발 경험</h2>
+                    <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">기존의 틀을 깨는 Vibe Coding만의 특별한 기능을 통해
+                        생산성을 극대화하세요.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="bg-white p-10 rounded-samsung border border-gray-100 hover-lift text-center"
-                        data-purpose="service-card">
+                    <!-- Feature 1 -->
+                    <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
                         <div
-                            class="w-16 h-16 bg-blue-50 text-samsungBlue rounded-2xl flex items-center justify-center mx-auto mb-6">
-                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                            </svg>
+                            class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary text-3xl">smart_toy</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">크리에이티브 코딩</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Canvas, WebGL을 이용한 예술적인 상호작용과 애니메이션 기법을 배웁니다.
+                        <h3 class="text-xl font-bold mb-3">AI 페어 프로그래밍</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            당신의 의도를 실시간으로 파악하여 최적의 코드를 제안합니다. 단순한 추천을 넘어 논리적 오류까지 미리 방지합니다.
                         </p>
                     </div>
-                    <!-- Card 2 -->
-                    <div class="bg-white p-10 rounded-samsung border border-gray-100 hover-lift text-center"
-                        data-purpose="service-card">
+                    <!-- Feature 2 -->
+                    <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
                         <div
-                            class="w-16 h-16 bg-purple-50 text-vibePrimary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A10.003 10.003 0 0012 21a10.003 10.003 0 008.384-4.51m-2.408-4.46A10.003 10.003 0 0112 15c-3.115 0-5.843-1.425-7.616-3.657M7 11a5 5 0 1010 0 5 5 0 00-10 0z"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                            </svg>
+                            class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary text-3xl">rocket_launch</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">UI/UX Precision</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">픽셀 단위의 정교함으로 완벽한 사용자 경험을 설계하는 법을 익힙니다.</p>
+                        <h3 class="text-xl font-bold mb-3">즉시 배포 시스템</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            복잡한 CI/CD 설정 없이 클릭 한 번으로 전 세계에 서비스를 출시하세요. 최적화된 인프라가 자동으로 구성됩니다.
+                        </p>
                     </div>
-                    <!-- Card 3 -->
-                    <div class="bg-white p-10 rounded-samsung border border-gray-100 hover-lift text-center"
-                        data-purpose="service-card">
+                    <!-- Feature 3 -->
+                    <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
                         <div
-                            class="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="2"></path>
-                            </svg>
+                            class="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-primary text-3xl">translate</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">모던 스택</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Next.js, Tailwind, TypeScript 등 최신 기술 트렌드를 실무
-                            중심으로 다룹니다.</p>
+                        <h3 class="text-xl font-bold mb-3">자연어 기반 코딩</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            "로그인 페이지 만들어줘" 같은 일상 언어로 설명하세요. AI가 실제 작동하는 상용 수준의 코드로 변환합니다.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- END: Services Section -->
-        <!-- BEGIN: Projects Grid -->
-        <section class="py-24" data-purpose="projects" id="projects">
-            <div class="container mx-auto px-4 md:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <!-- Testimonial Section -->
+        <section class="py-24">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                     <div>
-                        <h2 class="text-3xl font-bold mb-2">피처드 프로젝트</h2>
-                        <p class="text-gray-500">바이브코딩의 철학이 담긴 결과물을 확인하세요</p>
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-2 tracking-tight">이미 변화는 시작되었습니다</h2>
+                        <p class="text-slate-600 dark:text-slate-400">Vibe Coding과 함께하는 개발자들의 생생한 후기</p>
                     </div>
-                    <a class="mt-4 md:mt-0 text-samsungBlue font-semibold flex items-center hover:underline" href="#">
-                        모든 프로젝트 보기
-                        <svg class="h-5 w-5 ml-1" fill="currentColor" viewbox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                fill-rule="evenodd"></path>
-                        </svg>
-                    </a>
+                    <div class="flex gap-2">
+                        <button class="p-2 rounded-full border border-primary/20 hover:bg-primary/10 transition-colors">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <button class="p-2 rounded-full border border-primary/20 hover:bg-primary/10 transition-colors">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Project Card 1 -->
-                    <div class="group cursor-pointer">
-                        <div class="aspect-square bg-gray-100 rounded-samsung overflow-hidden mb-4 relative">
-                            <img alt="WebGL Particles"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuApguVBzaj_CCTAJ4x13mc29YYt95R4qDSWKdYUn5xu2_WDtHfCQmzTBIs05UbokXttOeHGoQD0Bkarcne_znLV4wbt905vhgbmn4Ax7wgtsSgqpy-4rEEJWKgvgXcUMsaM3B0QR5XnCfjNTRM-RiuVs1T_vcB24EomTTfFCafn0QmyGH7mwIxhGuBjsT8mcZRKOCzQ30fW1mylW5dJ73bVFxN89-gbYS37XfmPtgd-ITQoUu02qhkoB7yhHxE6yjowptHxDeVVct-H" />
-                            <div
-                                class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span
-                                    class="text-white font-medium border border-white/40 px-4 py-2 rounded-full backdrop-blur-sm">자세히
-                                    보기</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div
+                        class="bg-slate-50 dark:bg-white/5 p-8 rounded-2xl border border-slate-200 dark:border-white/5">
+                        <div class="flex gap-1 text-primary mb-4">
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                        </div>
+                        <p class="text-lg italic text-slate-700 dark:text-slate-300 mb-8 leading-relaxed">
+                            "Vibe Coding을 도입한 후 팀의 개발 속도가 300% 이상 향상되었습니다. 더 이상 단순 반복 작업에 시간을 낭비하지 않고 핵심 비즈니스 로직에만 집중할 수
+                            있게 되었어요."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden"
+                                data-alt="Professional portrait of a software engineer">
+                                <img alt="User" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeP_Ky_aGGG6FPiqNsIZfEGM1Bm0ugMvcK4CTGMYyReo_qx-IPxNJ3BYncnSDhI7r8XDnNHbSB9KKCWd6pRtBjESTzNTj2ehHox7ACD8eLYYsfKIR9yEkAV1EYMt_CtiC4n3Lk0IMLkDAQ1wFRNEMkg361khH-M4UujEsBTHIbGlxe4VNIWeyiwiEZbqqOj_Vv1E5NqZki2GIlqBilFuZH8H7jcA-W2aLWyBsjIuFBraUsgiUvyB7gD8-Oqs9u3mZ-R5b9_7atVYBg" />
+                            </div>
+                            <div>
+                                <h4 class="font-bold">김민준</h4>
+                                <p class="text-sm text-slate-500">Tech Lead, TechFlow Inc.</p>
                             </div>
                         </div>
-                        <h4 class="font-bold text-lg">WebGL Particles</h4>
-                        <p class="text-sm text-gray-500">인터랙티브 파티클 시스템</p>
                     </div>
-                    <!-- Project Card 2 -->
-                    <div class="group cursor-pointer">
-                        <div class="aspect-square bg-gray-100 rounded-samsung overflow-hidden mb-4 relative">
-                            <img alt="Vibe Analytics"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuALzff94RsidpQ32WsbDXdT7ks_mogPjHf7i4SRnD5PyIcFHmpNG-DxJBCAmVlTxZiUgkgkhuFhArwnk2PCRqtp0cZO-sGE8-PV5oxs3vKEdt3vFGid9WC-YNDHg-p6Y0wwVfO-v8L8ZNsRQFatq-xoonX1F5gy1OVOLpYxVXsjBb4PQEB64Cjf-TCRbCqglIkANNZpL0GSL3TPSXD4F2807ovNFd_hgqtJ2uPlWq93RhE9Bxz9_Lm1ZaRdBK4lJ_GR-JM9MefOPTjW" />
-                            <div
-                                class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span
-                                    class="text-white font-medium border border-white/40 px-4 py-2 rounded-full backdrop-blur-sm">자세히
-                                    보기</span>
+                    <!-- Testimonial 2 -->
+                    <div
+                        class="bg-slate-50 dark:bg-white/5 p-8 rounded-2xl border border-slate-200 dark:border-white/5">
+                        <div class="flex gap-1 text-primary mb-4">
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                        </div>
+                        <p class="text-lg italic text-slate-700 dark:text-slate-300 mb-8 leading-relaxed">
+                            "자연어로 코드를 짤 수 있다는 게 처음엔 믿기지 않았습니다. 하지만 실제로 써보니 AI의 정확도와 맥락 이해력에 정말 놀랐습니다. 코딩의 패러다임이 바뀌었습니다."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden"
+                                data-alt="Professional portrait of a developer">
+                                <img alt="User" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJnNVUhStHiZm-ER0_Ousz3VVb_tD2NOJFTaW0Kq5s7iCUnjT-17-gHbGdSrTBJcnajpePDt9u6glYa6nhTzlqIFSZE4hRyeCcth4ACQXz0iVUikSOHlLK4IjAMWBGp9wqvIBIyb_VSnEDBOczBrhyhOpkaB_4HUPxsnglixusust9OuedYLLVUAjr4k5I0ESHP8NBTmUZpsUGXoBw1qJY2ixsb6W3qHrVBXuvoNiXP0dioy232pmXcw7ncjtfOr0Kh9wv6X5e-QWV" />
+                            </div>
+                            <div>
+                                <h4 class="font-bold">이서연</h4>
+                                <p class="text-sm text-slate-500">Full-stack Developer, Creative Mind</p>
                             </div>
                         </div>
-                        <h4 class="font-bold text-lg">Vibe Analytics</h4>
-                        <p class="text-sm text-gray-500">데이터 시각화 대시보드</p>
-                    </div>
-                    <!-- Project Card 3 -->
-                    <div class="group cursor-pointer">
-                        <div class="aspect-square bg-gray-100 rounded-samsung overflow-hidden mb-4 relative">
-                            <img alt="Portfolio Mastery"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLaTNV-00Df73WuMUoboOaHwDrrzCDn24f_8OYO2Hf8YIkUqp-hY3IrW9MVQmK7zKcQKQzKks6OIn7vn_oF-lwwJHTQ2QwdSHHRYumaOmhTH_1bsB_j-U44hNBEloU8pt_FPE4oUPf3Z6PLhIFhY45zNpzslaxCzVQLQT9DtA_9iVzhGIywoUa2NPWatFMNVOIiKFdIxPI_oTKS0_db3Bqdrq6tXzuHgyu7K-eztLvSs_vkE28OFvWVCwtEDQ7OtBiI5qhfbWnypeP" />
-                            <div
-                                class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span
-                                    class="text-white font-medium border border-white/40 px-4 py-2 rounded-full backdrop-blur-sm">자세히
-                                    보기</span>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-lg">Portfolio Mastery</h4>
-                        <p class="text-sm text-gray-500">전문가용 포트폴리오 템플릿</p>
-                    </div>
-                    <!-- Project Card 4 -->
-                    <div class="group cursor-pointer">
-                        <div class="aspect-square bg-gray-100 rounded-samsung overflow-hidden mb-4 relative">
-                            <img alt="Zen Editor"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5clam21xJNelTunSmPUtOYX8aPP7mHqBTMa6sdkg06VJ8TfYpTrFnkJFeujMH9B8duVrTm8fwbIJMvru9EqmL93Sn_BvvFeSKpDFe4AcKkRLON_pi-CiNRrM4BVbT5ACDB8xt0QRjTJ0u9K-H7IUaUmk4t_qKCFIjGTTGuNLnWCxNgJsKYeYgBpZIxqOr0fCJUtz5syf-9sz0lDLGxUc66xXt7muw4Powwg6bBZXdqDO4Z5qfIi5zdyG-hnJrxc7_U2Og8PS8Q0oy" />
-                            <div
-                                class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <span
-                                    class="text-white font-medium border border-white/40 px-4 py-2 rounded-full backdrop-blur-sm">자세히
-                                    보기</span>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-lg">Zen Editor</h4>
-                        <p class="text-sm text-gray-500">집중을 돕는 코드 에디터</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- END: Projects Grid -->
-        <!-- BEGIN: Trust Section -->
-        <section class="py-16 border-y border-gray-100" data-purpose="partners">
-            <div class="container mx-auto px-4 md:px-8 text-center">
-                <p class="text-xs font-bold text-gray-400 tracking-widest uppercase mb-8">Trusted by industry leaders
-                </p>
-                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale">
-                    <span class="text-2xl font-black italic tracking-tighter">TechFlow</span>
-                    <span class="text-2xl font-black italic tracking-tighter">DataCore</span>
-                    <span class="text-2xl font-black italic tracking-tighter">DevCloud</span>
-                    <span class="text-2xl font-black italic tracking-tighter">PixelArt</span>
+        <!-- CTA Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="relative bg-primary rounded-3xl p-12 lg:p-20 overflow-hidden text-center text-white">
+                    <div
+                        class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl">
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl lg:text-6xl font-black mb-8 tracking-tighter">당신의 아이디어를<br />지금 바로 코드로 구현하세요
+                        </h2>
+                        <p class="text-primary-100/80 text-lg mb-12 max-w-xl mx-auto">더 이상 설치도, 설정도 필요 없습니다. 브라우저에서 바로
+                            시작하세요.</p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button
+                                class="px-10 py-5 bg-white text-primary rounded-xl font-bold text-xl shadow-2xl hover:bg-slate-100 transition-colors">
+                                무료로 시작하기
+                            </button>
+                            <button
+                                class="px-10 py-5 bg-primary/20 border border-white/30 text-white rounded-xl font-bold text-xl hover:bg-primary/30 transition-colors">
+                                엔터프라이즈 문의
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- END: Trust Section -->
-        <!-- BEGIN: CTA Section -->
-        <section class="py-24" data-purpose="cta">
-            <div class="container mx-auto px-4 md:px-8">
-                <div class="bg-vibeText rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
-                    <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-vibePrimary/20 rounded-full blur-3xl"></div>
-                    <div class="absolute -top-20 -left-20 w-80 h-80 bg-samsungBlue/20 rounded-full blur-3xl"></div>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10">나만의 바이브를 찾을 준비가 되셨나요?</h2>
-                    <p class="text-gray-300 text-lg mb-10 max-w-xl mx-auto relative z-10">지금 바로 가입하고 크리에이티브 코딩의 세계로
-                        뛰어드세요.</p>
-                    <button
-                        class="bg-white text-vibeText px-12 py-4 rounded-full text-lg font-bold hover:bg-gray-100 transition-colors relative z-10">
-                        Get Started
-                    </button>
-                </div>
-            </div>
-        </section>
-        <!-- END: CTA Section -->
     </main>
-    <!-- BEGIN: Footer -->
-    <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-20">
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-white/5 py-12 bg-background-light dark:bg-background-dark">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10">
                 <div class="col-span-2">
-                    <a class="text-xl font-extrabold tracking-tighter text-vibeText mb-6 block" href="#">VIBE CODING</a>
-                    <p class="text-gray-500 text-sm max-w-xs leading-relaxed">
-                        바이브코딩은 기술과 예술의 경계를 허무는 교육을 지향합니다. 누구나 자신만의 감각을 코드로 표현할 수 있도록 돕습니다.
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="material-symbols-outlined text-primary text-2xl">terminal</span>
+                        <span class="text-lg font-bold tracking-tight">Vibe Coding</span>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed max-w-xs">
+                        AI 기반 코딩의 새로운 표준. 우리는 전 세계 모든 사람이 쉽고 즐겁게 개발할 수 있는 세상을 만듭니다.
                     </p>
                 </div>
                 <div>
-                    <h5 class="font-bold mb-6">프로그램</h5>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a class="hover:text-vibeText" href="#">초급 과정</a></li>
-                        <li><a class="hover:text-vibeText" href="#">고급 과정</a></li>
-                        <li><a class="hover:text-vibeText" href="#">부트캠프</a></li>
-                        <li><a class="hover:text-vibeText" href="#">기업 교육</a></li>
+                    <h5 class="font-bold mb-4">제품</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a class="hover:text-primary" href="#">기능</a></li>
+                        <li><a class="hover:text-primary" href="#">버전 정보</a></li>
+                        <li><a class="hover:text-primary" href="#">확장 프로그램</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-bold mb-6">고객 지원</h5>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li><a class="hover:text-vibeText" href="#">FAQ</a></li>
-                        <li><a class="hover:text-vibeText" href="#">문의하기</a></li>
-                        <li><a class="hover:text-vibeText" href="#">이용 약관</a></li>
-                        <li><a class="hover:text-vibeText" href="#">개인정보처리방침</a></li>
+                    <h5 class="font-bold mb-4">회사</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a class="hover:text-primary" href="#">소개</a></li>
+                        <li><a class="hover:text-primary" href="#">채용</a></li>
+                        <li><a class="hover:text-primary" href="#">블로그</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="font-bold mb-6">소셜</h5>
-                    <div class="flex space-x-4">
-                        <a class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                            href="#">
-                            <span class="sr-only">Instagram</span>
-                            <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                            href="#">
-                            <span class="sr-only">Twitter</span>
-                            <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
-                                <path
-                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
+                    <h5 class="font-bold mb-4">리소스</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a class="hover:text-primary" href="#">문서</a></li>
+                        <li><a class="hover:text-primary" href="#">가이드</a></li>
+                        <li><a class="hover:text-primary" href="#">포럼</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">법적 고지</h5>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a class="hover:text-primary" href="#">개인정보처리방침</a></li>
+                        <li><a class="hover:text-primary" href="#">이용약관</a></li>
+                    </ul>
                 </div>
             </div>
             <div
-                class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-100 pt-8">
-                <p>© 2026 Vibe Coding Corp. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a class="hover:text-gray-600" href="#">개인정보처리방침</a>
-                    <a class="hover:text-gray-600" href="#">이용약관</a>
-                    <a class="hover:text-gray-600" href="#">쿠키 설정</a>
+                class="mt-16 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:row items-center justify-between gap-4">
+                <p class="text-xs text-slate-400">© 2024 Vibe Coding Inc. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined text-xl">share</span></a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined text-xl">alternate_email</span></a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined text-xl">language</span></a>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- END: Footer -->
-    <script data-purpose="interaction">
-        // Simple header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-sm');
-            } else {
-                header.classList.remove('shadow-sm');
-            }
-        });
-    </script>
 </body>
 
 </html>
