@@ -34,8 +34,19 @@
                             th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}">2026-02-23</span></span>
                 </div>
                 <hr>
-                <div class="py-3" style="min-height: 200px; white-space: pre-wrap;" th:text="${post.content}">
-                    게시글 내용이 여기에 표시됩니다.
+                <!-- 내용 -->
+                <div class="mb-4">
+                    <div class="py-3" style="min-height: 200px; white-space: pre-wrap;" th:text="${post.content}">
+                        게시글 내용이 여기에 표시됩니다.
+                    </div>
+                </div>
+
+                <!-- 태그 섹션 추가 -->
+                <div class="mb-4" th:if="${post.tags != null and !post.tags.isEmpty()}">
+                    <h5 class="fw-bold mb-3">태그</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary" th:each="tag : ${post.tags}" th:text="${tag}">태그명</span>
+                    </div>
                 </div>
             </div>
             <div class="card-footer bg-white py-3 d-flex justify-content-end align-items-center">

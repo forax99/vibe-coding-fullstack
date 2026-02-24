@@ -42,7 +42,18 @@
                                     내용 오류
                                 </div>
                             </div>
+                            <!-- 태그 -->
+                            <div class="mb-4">
+                                <label for="tags" class="form-label fw-bold">태그 (쉼표로 구분)</label>
+                                <input type="text" class="form-control" th:field="*{tags}"
+                                    placeholder="예: Spring, Java, H2"
+                                    th:classappend="${#fields.hasErrors('tags')} ? 'is-invalid'">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">
+                                    태그 오류
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-end gap-2">
+
                                 <a href="/posts" class="btn btn-outline-secondary px-4">취소</a>
                                 <button type="submit" class="btn btn-primary px-4">등록</button>
                             </div>

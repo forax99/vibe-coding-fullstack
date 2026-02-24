@@ -53,7 +53,19 @@
                                 </div>
                             </div>
 
+                            <!-- 태그 -->
+                            <div class="mb-4">
+                                <label for="tags" class="form-label fw-bold">태그 (쉼표로 구분)</label>
+                                <input type="text" class="form-control" th:field="*{tags}"
+                                    placeholder="예: Spring, Java, H2"
+                                    th:classappend="${#fields.hasErrors('tags')} ? 'is-invalid'">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}">
+                                    태그 오류
+                                </div>
+                            </div>
+
                             <div class="row mb-4">
+
                                 <!-- 생성일 (Read-only) -->
                                 <div class="col-md-4">
                                     <label class="form-label fw-bold">생성일</label>

@@ -3,8 +3,13 @@ package com.example.vibeapp.post;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface PostTagRepository {
+
+    /** 특정 게시글의 태그 목록 조회 */
+    List<PostTag> findByPostNo(@Param("postNo") Long postNo);
 
     /** 태그 추가 (auto-increment id) */
     void insert(PostTag postTag);

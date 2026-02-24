@@ -30,4 +30,10 @@
         WHERE post_no = #{postNo}
     </delete>
 
+    <select id="findByPostNo" resultMap="postTagResultMap" parameterType="long">
+        SELECT id, post_no, tag_name
+        FROM post_tags
+        WHERE post_no = #{postNo}
+    </select>
+
 </mapper>

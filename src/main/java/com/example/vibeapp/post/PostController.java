@@ -2,7 +2,8 @@ package com.example.vibeapp.post;
 
 import com.example.vibeapp.post.dto.PostCreateDto;
 import com.example.vibeapp.post.dto.PostListDto;
-import com.example.vibeapp.post.dto.PostResponseDTO;
+import com.example.vibeapp.post.dto.PostResponseDto;
+
 import com.example.vibeapp.post.dto.PostUpdateDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -39,16 +40,19 @@ public class PostController {
 
     @GetMapping("/posts/{no}")
     public String viewPost(@PathVariable Long no, Model model) {
-        PostResponseDTO post = postService.viewPost(no);
+        PostResponseDto post = postService.viewPost(no);
         model.addAttribute("post", post);
         return "post/post_detail";
     }
 
     @GetMapping("/posts/{no}/edit")
     public String updatePostForm(@PathVariable Long no, Model model) {
-        PostResponseDTO post = postService.findPost(no);
+        PostResponseDto post = postService.findPost(no);
         model.addAttribute("post", post);
-        model.addAttribute("postUpdateDto", new PostUpdateDto(post.title(), post.content()));
+
+        // Convert tags list to comma-separated string for the form
+        String tagsString = post.tags() != null ? String.join(", ", post.tags()) : "";
+        model.addAttribute("postUpdateDto", new PostUpdateDto(post.title(), post.content(), tagsString));
         return "post/post_edit_form";
     }
 
@@ -71,7 +75,8 @@ public class PostController {
     public String savePost(@PathVariable Long no, @Valid @ModelAttribute PostUpdateDto postUpdateDto,
             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            PostResponseDTO post = postService.findPost(no);
+            PostResponseDto post = postService.findPost(no);
+
             model.addAttribute("post", post);
             return "post/post_edit_form";
         }
