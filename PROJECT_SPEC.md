@@ -30,22 +30,27 @@
 - `spring-boot-starter-web`: REST API 및 웹 서블릿 지원
 - `spring-boot-starter`: 기본 스프링부트 스타터
 - `spring-boot-starter-test`: 테스트 자동화를 위한 라이브러리
+- `spring-boot-devtools`: 개발 중 자동 재시작 및 실시간 변경 반영 지원
 
 ## 5. 프론트엔드 도구
 - **CSS 프레임워크:**
   - `Tailwind CSS` (CDN 방식): 메인 랜딩 페이지 UI 담당
-  - `Bootstrap 5` (CDN 방식): 범용 UI 컴포넌트 및 기본 유틸리티 담당
+  - `Bootstrap 5` (CDN 방식): 범용 UI 컴포넌트(페이징, 모달 등) 및 기본 유틸리티 담당
 - **폰트:** `Inter`, `Nanum Gothic` (Google Fonts)
 
-## 6. API 및 컨트롤러 명세
+## 6. 프로젝트 구조 (기능형 구조)
+- **Home:** `com.example.vibeapp.home` / `templates/home/`
+- **Post:** `com.example.vibeapp.post` / `templates/post/`
+
+## 7. API 및 컨트롤러 명세
 ### Home (Web)
 - **컨트롤러:** `HomeController`
 - **엔드포인트:** `/`
-- **뷰 템플릿:** `home.html`
+- **뷰 템플릿:** `home/home.html`
 - **기능:** "Hello, Vibe!" 메시지 표시 (Bootstrap 5 적용)
 
 ### Landing (Web)
-- **엔드포인트:** `/landing.html` (정적 리소스 또는 향후 컨트롤러 매핑)
+- **엔드포인트:** `/landing.html`
 - **뷰 템플릿:** `landing.html`
 - **기능:** 바이브코딩 메인 브랜드 랜딩 페이지 (Tailwind CSS 적용)
 
@@ -57,24 +62,41 @@
 
 ### Posts (Web)
 - **컨트롤러:** `PostController`
-- **엔드포인트:** `/posts`
-- **뷰 템플릿:** `posts.html`
-- **기능:** 게시글 목록 조회 (번호, 제목, 생성일, 조회수 표시)
+- **엔드포인트:** `/posts` (파라미터: `page` - 기본값 1)
+- **뷰 템플릿:** `post/posts.html`
+- **기능:** 게시글 목록 조회 및 **페이지네이션 (페이지당 5개)**
 - **데이터 관리:** `PostService` (ArrayList 기반 메모리 저장소)
 
 ### Post Detail (Web)
 - **컨트롤러:** `PostController`
 - **엔드포인트:** `/posts/{no}`
-- **뷰 템플릿:** `post_detail.html`
-- **기능:** 게시글 상세 내용 조회 및 조회수 증가
+- **뷰 템플릿:** `post/post_detail.html`
+- **기능:** 
+  - 게시글 상세 내용 조회 및 조회수 증가
+  - 수정/삭제 버튼 제공 (삭제 시 **Bootstrap Modal** 컨펌 적용)
 
 ### Post Create (Web)
 - **컨트롤러:** `PostController`
 - **엔드포인트:** 
-  - GET `/posts/new`: 작성 폼 제공
-  - POST `/posts/add`: 새 게시글 등록 및 목록 리다이렉트
-- **기능:** 폼 데이터를 받아 인메모리에 저장 (번호 자동 생성, 날짜/조회수 초기화)
+  - GET `/posts/new`: `createPostForm` (작성 폼)
+  - POST `/posts/add`: `addPost` (데이터 저장)
+- **뷰 템플릿:** `post/post_new_form.html`
+- **기능:** 새 게시글 등록 및 자동 번호 할당
 
-## 6. 개발 표준
+### Post Update (Web)
+- **컨트롤러:** `PostController`
+- **엔드포인트:** 
+  - GET `/posts/{no}/edit`: `updatePostForm` (수정 폼)
+  - POST `/posts/{no}/save`: `updatePost` (정보 갱신)
+- **뷰 템플릿:** `post/post_edit_form.html`
+- **기능:** 기존 게시글 내용 수정 및 `updatedAt` 갱신
+
+### Post Delete (Web)
+- **컨트롤러:** `PostController`
+- **엔드포인트:** POST `/posts/{no}/delete`
+- **기능:** 게시글 영구 삭제 및 목록 페이지 리다이렉트
+
+## 8. 개발 표준
 - **설정 관리:** 모든 설정은 `src/main/resources/application.yml` 파일에서 관리합니다.
 - **포트 설정:** 기본 포트는 `8080`을 사용합니다.
+- **명명 규칙:** 실무 관례를 준수하며, 명확한 동사 기반의 메서드명을 사용합니다.
