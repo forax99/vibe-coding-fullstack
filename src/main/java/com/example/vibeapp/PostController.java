@@ -28,6 +28,13 @@ public class PostController {
         return "post_detail";
     }
 
+    @GetMapping("/posts/{no}/edit")
+    public String editForm(@org.springframework.web.bind.annotation.PathVariable Long no, Model model) {
+        Post post = postService.getPost(no);
+        model.addAttribute("post", post);
+        return "post_edit_form";
+    }
+
     @GetMapping("/posts/new")
     public String form() {
         return "post_new_form";
@@ -35,7 +42,7 @@ public class PostController {
 
     @org.springframework.web.bind.annotation.PostMapping("/posts/add")
     public String addPost(@org.springframework.web.bind.annotation.RequestParam String title,
-                          @org.springframework.web.bind.annotation.RequestParam String content) {
+            @org.springframework.web.bind.annotation.RequestParam String content) {
         postService.addPost(title, content);
         return "redirect:/posts";
     }

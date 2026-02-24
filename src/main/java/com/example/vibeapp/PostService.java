@@ -23,8 +23,7 @@ public class PostService {
                     "테스트 게시글 내용입니다. " + i,
                     LocalDateTime.now().minusDays(10 - i),
                     LocalDateTime.now().minusDays(10 - i),
-                    i * 10
-            ));
+                    i * 10));
         }
     }
 
@@ -38,6 +37,10 @@ public class PostService {
             post.setViews(post.getViews() + 1);
         }
         return post;
+    }
+
+    public Post getPost(Long no) {
+        return postRepository.findByNo(no);
     }
 
     public void addPost(String title, String content) {

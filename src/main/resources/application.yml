@@ -1,6 +1,8 @@
 spring:
   application:
     name: vibeapp
+  thymeleaf:
+    cache: false
 
 server:
   port: 8080

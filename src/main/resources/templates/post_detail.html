@@ -39,6 +39,7 @@
                 </div>
             </div>
             <div class="card-footer bg-white py-3 d-flex justify-content-end">
+                <a th:href="@{/posts/{no}/edit(no=${post.no})}" class="btn btn-primary px-4 me-2">수정</a>
                 <a href="/posts" class="btn btn-outline-secondary px-4">목록으로</a>
             </div>
         </div>
