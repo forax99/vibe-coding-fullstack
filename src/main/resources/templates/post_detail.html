@@ -39,15 +39,37 @@
                 </div>
             </div>
             <div class="card-footer bg-white py-3 d-flex justify-content-end align-items-center">
-                <form th:action="@{/posts/{no}/delete(no=${post.no})}" method="post"
-                    onsubmit="return confirm('정말로 이 게시글을 삭제하시겠습니까?');" class="me-auto">
-                    <button type="submit" class="btn btn-danger px-4">삭제</button>
+                <form id="deleteForm" th:action="@{/posts/{no}/delete(no=${post.no})}" method="post" class="me-auto">
+                    <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">삭제</button>
                 </form>
                 <a th:href="@{/posts/{no}/edit(no=${post.no})}" class="btn btn-primary px-4 me-2">수정</a>
                 <a href="/posts" class="btn btn-outline-secondary px-4">목록으로</a>
             </div>
         </div>
     </div>
+    <!-- 삭제 확인 모달 -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">게시글 삭제 확인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    정말로 이 게시글을 삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-danger"
+                        onclick="document.getElementById('deleteForm').submit();">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
