@@ -55,7 +55,7 @@ public class PostService {
         return PostResponseDto.from(post, tags);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void addPost(PostCreateDto dto) {
         // Save post entity
         var post = dto.toEntity();
@@ -74,7 +74,7 @@ public class PostService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updatePost(Long no, PostUpdateDto dto) {
         var post = postRepository.findByNo(no);
         if (post == null) {
@@ -97,6 +97,7 @@ public class PostService {
     }
 
     /** 게시글 삭제 */
+    @Transactional(rollbackFor = Exception.class)
     public void deletePost(Long no) {
         postRepository.deleteByNo(no);
     }
