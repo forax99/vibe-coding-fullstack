@@ -38,5 +38,10 @@ out/
 *.bak
 *.swp
 *~
+### H2 Database ###
+/data/
+*.mv.db
+*.trace.db
+
 .DS_Store
 bin/
