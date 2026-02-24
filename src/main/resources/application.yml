@@ -14,6 +14,9 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
+  sql:
+    init:
+      mode: always
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
