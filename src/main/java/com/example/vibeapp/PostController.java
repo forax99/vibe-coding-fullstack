@@ -15,9 +15,16 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String list(Model model) {
-        List<Post> posts = postService.getPosts();
+    public String list(@org.springframework.web.bind.annotation.RequestParam(defaultValue = "1") int page,
+            Model model) {
+        int size = 5;
+        List<Post> posts = postService.getPagedPosts(page, size);
+        int totalCount = postService.getTotalCount();
+        int totalPages = (int) Math.ceil((double) totalCount / size);
+
         model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
         return "posts";
     }
 

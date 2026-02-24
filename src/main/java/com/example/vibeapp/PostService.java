@@ -16,7 +16,7 @@ public class PostService {
 
     @PostConstruct
     public void init() {
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 12; i++) {
             postRepository.save(new Post(
                     (long) i,
                     "테스트 게시글 제목 " + i,
@@ -29,6 +29,25 @@ public class PostService {
 
     public List<Post> getPosts() {
         return postRepository.findAll();
+    }
+
+    public List<Post> getPagedPosts(int page, int size) {
+        List<Post> allPosts = postRepository.findAll();
+        // 게시글 번호 내림차순 정렬 (최신순)
+        allPosts.sort((p1, p2) -> p2.getNo().compareTo(p1.getNo()));
+
+        int start = (page - 1) * size;
+        int end = Math.min(start + size, allPosts.size());
+
+        if (start >= allPosts.size()) {
+            return List.of();
+        }
+
+        return allPosts.subList(start, end);
+    }
+
+    public int getTotalCount() {
+        return postRepository.findAll().size();
     }
 
     public Post getPostWithViewCount(Long no) {
