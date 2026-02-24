@@ -1,37 +1,31 @@
 package com.example.vibeapp.post;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class PostRepository {
-    private final List<Post> posts = new ArrayList<>();
+@Mapper
+public interface PostRepository {
 
-    public void save(Post post) {
-        if (post.getNo() == null) {
-            long nextNo = posts.stream()
-                    .mapToLong(Post::getNo)
-                    .max()
-                    .orElse(0L) + 1;
-            post.setNo(nextNo);
-        }
-        posts.add(post);
-    }
+    /** 전체 목록 (최신순) */
+    List<Post> findAll();
 
-    public List<Post> findAll() {
-        return new ArrayList<>(posts);
-    }
+    /** 페이징 목록 */
+    List<Post> findPaged(@Param("offset") int offset, @Param("size") int size);
 
-    public Post findByNo(Long no) {
-        return posts.stream()
-                .filter(post -> post.getNo().equals(no))
-                .findFirst()
-                .orElse(null);
-    }
+    /** 총 게시글 수 */
+    int count();
 
-    public void deleteByNo(Long no) {
-        posts.removeIf(post -> post.getNo().equals(no));
-    }
+    /** 단건 조회 */
+    Post findByNo(Long no);
+
+    /** 새 게시글 삽입 (auto-increment no) */
+    void insert(Post post);
+
+    /** 게시글 수정 */
+    void update(Post post);
+
+    /** 게시글 삭제 */
+    void deleteByNo(Long no);
 }
